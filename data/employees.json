@@ -1,0 +1,46 @@
+{
+  "employees": [
+    {
+      "name": "John Smith",
+      "id": "234",
+      "building": "Caleres1",
+      "provider": "Staffmark"
+    },
+    {
+      "name": "Musa Wonder",
+      "id": "3232",
+      "building": "Caleres1",
+      "provider": "Staffmark"
+    },
+    {
+      "name": "John Button",
+      "id": "232",
+      "building": "Caleres1",
+      "provider": "A1"
+    },
+    {
+      "name": "Andrew Bergers",
+      "id": "121",
+      "building": "Caleres1",
+      "provider": "Staffmark"
+    },
+    {
+      "name": "Andrew Bergers Anton",
+      "id": "3235",
+      "building": "Caleres1",
+      "provider": "Staffmark"
+    },
+    {
+      "name": "Musa Jumboree",
+      "id": "121",
+      "building": "Caleres2",
+      "provider": "A1"
+    },
+    {
+      "name": "Edwin Kawuma",
+      "id": "223",
+      "building": "Caleres2",
+      "provider": "A1"
+    }
+  ]
+}
