@@ -134,7 +134,7 @@ export default function EmployeeList({
                   <Table.HeaderCell>ID</Table.HeaderCell>
                   <Table.HeaderCell>Building</Table.HeaderCell>
                   <Table.HeaderCell>Provider</Table.HeaderCell>
-                  {!viewerMode && <Table.HeaderCell>Actions</Table.HeaderCell>}
+                  {/* {!viewerMode && <Table.HeaderCell>Actions</Table.HeaderCell>} */}
                 </Table.Row>
               </Table.Header>
 
@@ -153,7 +153,7 @@ export default function EmployeeList({
                       <Table.Cell>{employee.id}</Table.Cell>
                       <Table.Cell>{employee.building}</Table.Cell>
                       <Table.Cell>{employee.provider}</Table.Cell>
-                      {!viewerMode && (
+                      {/* {!viewerMode && (
                         <Table.Cell>
                           <Button.Group>
                             <Button
@@ -175,7 +175,7 @@ export default function EmployeeList({
                             </Button>
                           </Button.Group>
                         </Table.Cell>
-                      )}
+                      )} */}
                     </Table.Row>
                   )
                 )}
