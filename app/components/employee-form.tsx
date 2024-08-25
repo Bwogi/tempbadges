@@ -32,6 +32,7 @@ export default function EmployeeForm() {
         building: "Caleres1",
         provider: "Staffmark",
       });
+      // Optionally, you can trigger a refresh of the employee list here
     } else {
       setMessage({ content: "Failed to add employee", negative: true });
     }
