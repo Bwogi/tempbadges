@@ -1,11 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Table, Button, Input } from "semantic-ui-react";
+import { Table, Button, Input, Grid } from "semantic-ui-react";
 import { Employee } from "@/types/employee";
 import EditableRow from "./editable-row";
 
-export default function EmployeeList() {
+interface EmployeeListProps {
+  viewerMode?: boolean;
+}
+
+export default function EmployeeList({
+  viewerMode = false,
+}: EmployeeListProps) {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,6 +29,7 @@ export default function EmployeeList() {
   };
 
   const handleDelete = async (id: string) => {
+    if (viewerMode) return;
     const response = await fetch(`/api/employees?id=${id}`, {
       method: "DELETE",
     });
@@ -32,10 +39,12 @@ export default function EmployeeList() {
   };
 
   const handleEdit = (id: string) => {
+    if (viewerMode) return;
     setEditingId(id);
   };
 
   const handleSave = async (updatedEmployee: Employee) => {
+    if (viewerMode) return;
     const response = await fetch("/api/employees", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -48,6 +57,7 @@ export default function EmployeeList() {
   };
 
   const handleCancel = () => {
+    if (viewerMode) return;
     setEditingId(null);
   };
 
@@ -73,35 +83,84 @@ export default function EmployeeList() {
         value={searchQuery}
         onChange={handleSearch}
         style={{ marginBottom: "1em" }}
+        fluid
       />
-      <Table celled>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Name</Table.HeaderCell>
-            <Table.HeaderCell>ID</Table.HeaderCell>
-            <Table.HeaderCell>Building</Table.HeaderCell>
-            <Table.HeaderCell>Provider</Table.HeaderCell>
-            <Table.HeaderCell>Actions</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
+      <div className="desktop-view">
+        <Table celled>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Name</Table.HeaderCell>
+              <Table.HeaderCell>ID</Table.HeaderCell>
+              <Table.HeaderCell>Building</Table.HeaderCell>
+              <Table.HeaderCell>Provider</Table.HeaderCell>
+              {!viewerMode && <Table.HeaderCell>Actions</Table.HeaderCell>}
+            </Table.Row>
+          </Table.Header>
 
-        <Table.Body>
-          {filteredEmployees.map((employee) =>
-            editingId === employee.id ? (
-              <EditableRow
-                key={employee.id}
-                employee={employee}
-                onSave={handleSave}
-                onCancel={handleCancel}
-              />
-            ) : (
-              <Table.Row key={employee.id}>
-                <Table.Cell>{employee.name}</Table.Cell>
-                <Table.Cell>{employee.id}</Table.Cell>
-                <Table.Cell>{employee.building}</Table.Cell>
-                <Table.Cell>{employee.provider}</Table.Cell>
-                <Table.Cell>
-                  <Button.Group>
+          <Table.Body>
+            {filteredEmployees.map((employee) =>
+              editingId === employee.id && !viewerMode ? (
+                <EditableRow
+                  key={employee.id}
+                  employee={employee}
+                  onSave={handleSave}
+                  onCancel={handleCancel}
+                />
+              ) : (
+                <Table.Row key={employee.id}>
+                  <Table.Cell>{employee.name}</Table.Cell>
+                  <Table.Cell>{employee.id}</Table.Cell>
+                  <Table.Cell>{employee.building}</Table.Cell>
+                  <Table.Cell>{employee.provider}</Table.Cell>
+                  {!viewerMode && (
+                    <Table.Cell>
+                      <Button.Group>
+                        <Button primary onClick={() => handleEdit(employee.id)}>
+                          Edit
+                        </Button>
+                        <Button.Or />
+                        <Button
+                          color="red"
+                          onClick={() => handleDelete(employee.id)}
+                        >
+                          Delete
+                        </Button>
+                      </Button.Group>
+                    </Table.Cell>
+                  )}
+                </Table.Row>
+              )
+            )}
+          </Table.Body>
+        </Table>
+      </div>
+      <div className="mobile-view">
+        <Grid>
+          {filteredEmployees.map((employee) => (
+            <Grid.Row
+              key={employee.id}
+              style={{
+                marginBottom: "1em",
+                padding: "1em",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+              }}
+            >
+              <Grid.Column width={16}>
+                <p>
+                  <strong>Name:</strong> {employee.name}
+                </p>
+                <p>
+                  <strong>ID:</strong> {employee.id}
+                </p>
+                <p>
+                  <strong>Building:</strong> {employee.building}
+                </p>
+                <p>
+                  <strong>Provider:</strong> {employee.provider}
+                </p>
+                {!viewerMode && (
+                  <Button.Group fluid>
                     <Button primary onClick={() => handleEdit(employee.id)}>
                       Edit
                     </Button>
@@ -113,12 +172,12 @@ export default function EmployeeList() {
                       Delete
                     </Button>
                   </Button.Group>
-                </Table.Cell>
-              </Table.Row>
-            )
-          )}
-        </Table.Body>
-      </Table>
+                )}
+              </Grid.Column>
+            </Grid.Row>
+          ))}
+        </Grid>
+      </div>
     </div>
   );
 }
