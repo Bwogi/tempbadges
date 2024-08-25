@@ -207,7 +207,7 @@ export default function EmployeeList({
                     <p>
                       <strong>Provider:</strong> {employee.provider}
                     </p>
-                    {!viewerMode && (
+                    {/* {!viewerMode && (
                       <Button.Group fluid>
                         <Button
                           primary
@@ -227,7 +227,7 @@ export default function EmployeeList({
                           Delete
                         </Button>
                       </Button.Group>
-                    )}
+                    )} */}
                   </Grid.Column>
                 </Grid.Row>
               ))}
