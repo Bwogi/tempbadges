@@ -10,7 +10,7 @@ import {
 } from "semantic-ui-react";
 import EmployeeList from "./components/employee-list";
 import EmployeeForm from "./components/employee-form";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function Home() {
   const [activeItem, setActiveItem] = useState("list");
@@ -23,15 +23,6 @@ export default function Home() {
 
   return (
     <Container fluid style={{ marginTop: "2em", padding: "0 1em" }}>
-      <div className="auth-buttons">
-        <SignedIn>
-          <UserButton afterSignOutUrl="/" />
-        </SignedIn>
-        <SignedOut>
-          <SignInButton mode="modal" />
-        </SignedOut>
-      </div>
-
       <Grid>
         <Grid.Row>
           <Grid.Column>
