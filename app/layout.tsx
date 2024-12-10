@@ -17,15 +17,49 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      appearance={{
+        elements: {
+          formButtonPrimary: 'bg-slate-500 hover:bg-slate-400',
+          footerActionLink: 'text-slate-500 hover:text-slate-400',
+          card: 'bg-white shadow-xl rounded-xl',
+        },
+        layout: {
+          socialButtonsVariant: 'iconButton',
+          socialButtonsPlacement: 'bottom',
+          shimmer: true,
+        },
+      }}
+    >
       <html lang="en">
         <body className={inter.className}>
           <div className="auth-buttons">
             <SignedIn>
-              <UserButton afterSignOutUrl="/" />
+              <UserButton 
+                afterSignOutUrl="/"
+                appearance={{
+                  elements: {
+                    avatarBox: 'w-10 h-10',
+                    userButtonPopoverCard: 'bg-white shadow-xl rounded-xl p-2',
+                    userButtonPopoverActionButton: 'text-slate-900 hover:text-slate-700',
+                  }
+                }}
+              />
             </SignedIn>
             <SignedOut>
-              <SignInButton mode="modal" />
+              <SignInButton 
+                mode="modal"
+                appearance={{
+                  elements: {
+                    modalBackdrop: 'backdrop-blur-sm',
+                    modalContent: 'shadow-xl rounded-xl',
+                    formFieldInput: 'rounded border-gray-300',
+                    formButtonPrimary: 'bg-slate-500 hover:bg-slate-400',
+                    footerActionLink: 'text-slate-500 hover:text-slate-400'
+                  }
+                }}
+              />
             </SignedOut>
           </div>
           {children}
