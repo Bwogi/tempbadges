@@ -23,22 +23,24 @@ export default function Home() {
 
   return (
     <Container fluid style={{ marginTop: "2em", padding: "0 1em" }}>
+      <div className="auth-buttons">
+        <SignedIn>
+          <UserButton afterSignOutUrl="/" />
+        </SignedIn>
+        <SignedOut>
+          <SignInButton mode="modal" />
+        </SignedOut>
+      </div>
+
       <Grid>
         <Grid.Row>
           <Grid.Column>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1em' }}>
+            <div className="header-container">
               <Header as="h2">Employee Management</Header>
-              <div>
-                <SignedIn>
-                  <UserButton afterSignOutUrl="/" />
-                </SignedIn>
-                <SignedOut>
-                  <SignInButton mode="modal" />
-                </SignedOut>
-              </div>
             </div>
           </Grid.Column>
         </Grid.Row>
+
         <SignedIn>
           <Grid.Row>
             <Grid.Column>

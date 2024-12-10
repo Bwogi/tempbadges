@@ -17,6 +17,21 @@ body {
   display: none;
 }
 
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+  padding: 0.5em;
+}
+
+.auth-buttons {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  z-index: 1000;
+}
+
 @media (max-width: 767px) {
   .desktop-menu,
   .desktop-view {
@@ -35,5 +50,15 @@ body {
   .ui.button {
     padding: 0.5em 1em;
     font-size: 0.8em;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+  }
+
+  .header-container h2 {
+    margin-right: 3em; /* Make room for the auth buttons */
   }
 }
