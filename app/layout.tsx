@@ -24,6 +24,12 @@ export default function RootLayout({
           formButtonPrimary: 'bg-slate-500 hover:bg-slate-400',
           footerActionLink: 'text-slate-500 hover:text-slate-400',
           card: 'bg-white shadow-xl rounded-xl',
+          modalBackdrop: 'backdrop-blur-sm',
+          modalContent: 'shadow-xl rounded-xl',
+          formFieldInput: 'rounded border-gray-300',
+          avatarBox: 'w-10 h-10',
+          userButtonPopoverCard: 'bg-white shadow-xl rounded-xl p-2',
+          userButtonPopoverActionButton: 'text-slate-900 hover:text-slate-700',
         },
         layout: {
           socialButtonsVariant: 'iconButton',
@@ -36,30 +42,10 @@ export default function RootLayout({
         <body className={inter.className}>
           <div className="auth-buttons">
             <SignedIn>
-              <UserButton 
-                afterSignOutUrl="/"
-                appearance={{
-                  elements: {
-                    avatarBox: 'w-10 h-10',
-                    userButtonPopoverCard: 'bg-white shadow-xl rounded-xl p-2',
-                    userButtonPopoverActionButton: 'text-slate-900 hover:text-slate-700',
-                  }
-                }}
-              />
+              <UserButton afterSignOutUrl="/" />
             </SignedIn>
             <SignedOut>
-              <SignInButton 
-                mode="modal"
-                appearance={{
-                  elements: {
-                    modalBackdrop: 'backdrop-blur-sm',
-                    modalContent: 'shadow-xl rounded-xl',
-                    formFieldInput: 'rounded border-gray-300',
-                    formButtonPrimary: 'bg-slate-500 hover:bg-slate-400',
-                    footerActionLink: 'text-slate-500 hover:text-slate-400'
-                  }
-                }}
-              />
+              <SignInButton mode="modal" />
             </SignedOut>
           </div>
           {children}
