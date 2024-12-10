@@ -4,14 +4,28 @@ import { ObjectId } from "mongodb";
 
 export async function GET() {
   try {
+    console.log('Attempting to connect to MongoDB...');
     const client = await clientPromise;
+    console.log('Connected to MongoDB successfully');
+    
     const db = client.db(process.env.MONGODB_DB);
-    const employees = await db.collection("employees").find({}).toArray();
+    console.log('Database selected:', process.env.MONGODB_DB);
+    
+    const collection = db.collection("employees");
+    console.log('Accessing employees collection');
+    
+    const employees = await collection.find({}).toArray();
+    console.log('Query executed, found', employees.length, 'employees');
+    
     return NextResponse.json(employees);
   } catch (e) {
-    console.error("Failed to fetch employees:", e);
+    console.error("Failed to fetch employees - Detailed error:", {
+      error: e,
+      message: e.message,
+      stack: e.stack
+    });
     return NextResponse.json(
-      { error: "Failed to fetch employees" },
+      { error: "Failed to fetch employees", details: e.message },
       { status: 500 }
     );
   }
