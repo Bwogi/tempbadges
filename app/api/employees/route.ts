@@ -19,13 +19,14 @@ export async function GET() {
     
     return NextResponse.json(employees);
   } catch (e) {
+    const error = e as Error;
     console.error("Failed to fetch employees - Detailed error:", {
-      error: e,
-      message: e.message,
-      stack: e.stack
+      name: error.name,
+      message: error.message,
+      stack: error.stack
     });
     return NextResponse.json(
-      { error: "Failed to fetch employees", details: e.message },
+      { error: "Failed to fetch employees", details: error.message },
       { status: 500 }
     );
   }
@@ -42,9 +43,14 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     );
   } catch (e) {
-    console.error("Failed to add employee:", e);
+    const error = e as Error;
+    console.error("Failed to add employee - Detailed error:", {
+      name: error.name,
+      message: error.message,
+      stack: error.stack
+    });
     return NextResponse.json(
-      { error: "Failed to add employee" },
+      { error: "Failed to add employee", details: error.message },
       { status: 500 }
     );
   }
@@ -61,9 +67,14 @@ export async function PUT(request: NextRequest) {
       .updateOne({ _id: new ObjectId(_id) }, { $set: employeeWithoutId });
     return NextResponse.json(updatedEmployee);
   } catch (e) {
-    console.error(e);
+    const error = e as Error;
+    console.error("Failed to update employee - Detailed error:", {
+      name: error.name,
+      message: error.message,
+      stack: error.stack
+    });
     return NextResponse.json(
-      { error: "Failed to update employee" },
+      { error: "Failed to update employee", details: error.message },
       { status: 500 }
     );
   }
@@ -99,9 +110,14 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json({ message: "Employee deleted" });
   } catch (e) {
-    console.error(e);
+    const error = e as Error;
+    console.error("Failed to delete employee - Detailed error:", {
+      name: error.name,
+      message: error.message,
+      stack: error.stack
+    });
     return NextResponse.json(
-      { error: "Failed to delete employee" },
+      { error: "Failed to delete employee", details: error.message },
       { status: 500 }
     );
   }
