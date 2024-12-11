@@ -1,7 +1,7 @@
 "use client";
 
 import { Container, Header } from "semantic-ui-react";
-import EmployeeList from "../components/employee-list";
+import EmployeeList from "@/app/components/employee-list";
 
 export default function ViewerPage() {
   return (
