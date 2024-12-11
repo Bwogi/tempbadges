@@ -7,10 +7,12 @@ import {
   Menu,
   MenuItemProps,
   Grid,
+  Button,
 } from "semantic-ui-react";
 import EmployeeList from "./components/employee-list";
 import EmployeeForm from "./components/employee-form";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default function Home() {
   const [activeItem, setActiveItem] = useState("list");
@@ -26,8 +28,11 @@ export default function Home() {
       <Grid>
         <Grid.Row>
           <Grid.Column>
-            <div className="header-container">
+            <div className="header-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Header as="h2">Employee Management</Header>
+              <Link href="/badge-management" style={{ textDecoration: 'none' }}>
+                <Button primary>Badge Management</Button>
+              </Link>
             </div>
           </Grid.Column>
         </Grid.Row>
@@ -69,6 +74,7 @@ export default function Home() {
               </Menu>
             </Grid.Column>
           </Grid.Row>
+
           <Grid.Row>
             <Grid.Column>
               {activeItem === "list" && <EmployeeList viewerMode={false} />}
@@ -76,10 +82,11 @@ export default function Home() {
             </Grid.Column>
           </Grid.Row>
         </SignedIn>
+
         <SignedOut>
           <Grid.Row>
             <Grid.Column>
-              <p>Please sign in to manage employees.</p>
+              <Header as="h3">Please sign in to access employee management.</Header>
             </Grid.Column>
           </Grid.Row>
         </SignedOut>
