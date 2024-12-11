@@ -13,7 +13,9 @@ export default function Page() {
         path="/sign-in"
         routing="path"
         signUpUrl="/sign-up"
-        defaultStrategy="phone_code"
+        initialValues={{
+          strategy: "phone_code"
+        }}
       />
     </div>
   );
