@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Form, Input, Button, Table, Message, Header } from 'semantic-ui-react';
-import { DateInput } from 'semantic-ui-calendar-react';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { useRouter } from 'next/navigation';
@@ -142,11 +143,14 @@ export default function BadgeManagement() {
     setFilteredRecords(filtered);
   };
 
-  const handleDateChange = (field: 'startDate' | 'endDate', value: string): void => {
-    setDateFilter(prev => ({
-      ...prev,
-      [field]: value || ''
-    }));
+  const handleDateChange = (date: Date | null, field: 'startDate' | 'endDate') => {
+    if (date) {
+      const formattedDate = formatInPST(date.toISOString());
+      setDateFilter(prev => ({
+        ...prev,
+        [field]: formattedDate
+      }));
+    }
   };
 
   const exportToPDF = () => {
@@ -494,18 +498,22 @@ export default function BadgeManagement() {
           <Form.Group widths='equal'>
             <Form.Field>
               <label>Start Date</label>
-              <DateInput
-                value={dateFilter.startDate}
-                onChange={(e, data) => handleDateChange('startDate', data.value)}
-                maxDate={dateFilter.endDate}
+              <DatePicker
+                selected={dateFilter.startDate ? new Date(dateFilter.startDate) : null}
+                onChange={(date) => handleDateChange(date, 'startDate')}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="Select start date"
+                className="form-control"
               />
             </Form.Field>
             <Form.Field>
               <label>End Date</label>
-              <DateInput
-                value={dateFilter.endDate}
-                onChange={(e, data) => handleDateChange('endDate', data.value)}
-                minDate={dateFilter.startDate}
+              <DatePicker
+                selected={dateFilter.endDate ? new Date(dateFilter.endDate) : null}
+                onChange={(date) => handleDateChange(date, 'endDate')}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="Select end date"
+                className="form-control"
               />
             </Form.Field>
             <Form.Field>

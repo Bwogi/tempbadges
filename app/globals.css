@@ -82,6 +82,47 @@ main {
   width: 100% !important;
 }
 
+/* Date Picker Styles */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 0.67857143em 1em;
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 0.28571429rem;
+  font-family: inherit;
+}
+
+.react-datepicker__input-container input:focus {
+  border-color: #85b7d9;
+  outline: none;
+}
+
+/* Make date picker match Semantic UI styling */
+.react-datepicker {
+  font-family: inherit;
+  border-color: rgba(34,36,38,.15);
+}
+
+.react-datepicker__header {
+  background-color: #f9fafb;
+  border-bottom-color: rgba(34,36,38,.15);
+}
+
+.react-datepicker__current-month {
+  font-weight: 500;
+}
+
+.react-datepicker__day--selected {
+  background-color: #2185d0;
+}
+
+.react-datepicker__day--selected:hover {
+  background-color: #1678c2;
+}
+
 @media (max-width: 767px) {
   .desktop-menu,
   .desktop-view {
