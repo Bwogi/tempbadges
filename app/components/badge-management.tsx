@@ -104,7 +104,19 @@ export default function BadgeManagement() {
   }, []);
 
   useEffect(() => {
-    filterRecords();
+    if (searchTimeout.current) {
+      clearTimeout(searchTimeout.current);
+    }
+
+    searchTimeout.current = setTimeout(() => {
+      filterRecords();
+    }, 300); // Debounce for 300ms
+
+    return () => {
+      if (searchTimeout.current) {
+        clearTimeout(searchTimeout.current);
+      }
+    };
   }, [badgeRecords, dateFilter, tableSearchValue]);
 
   const filterRecords = () => {
@@ -129,15 +141,25 @@ export default function BadgeManagement() {
       });
     }
 
-    // Apply search filter
+    // Apply search filter with improved search logic
     if (tableSearchValue.trim()) {
-      const searchLower = tableSearchValue.toLowerCase();
-      filtered = filtered.filter(record => 
-        record.employeeName.toLowerCase().includes(searchLower) ||
-        record.badgeNumber.toLowerCase().includes(searchLower) ||
-        record.status.toLowerCase().includes(searchLower) ||
-        record.building.toLowerCase().includes(searchLower)
-      );
+      const searchTerms = tableSearchValue.toLowerCase().trim().split(/\s+/);
+      
+      filtered = filtered.filter(record => {
+        const searchableFields = [
+          record.employeeName,
+          record.employeeId,
+          record.badgeNumber,
+          record.status,
+          record.building,
+          record.provider
+        ].map(field => (field || '').toLowerCase());
+
+        // All search terms must match at least one field
+        return searchTerms.every(term =>
+          searchableFields.some(field => field.includes(term))
+        );
+      });
     }
 
     setFilteredRecords(filtered);
