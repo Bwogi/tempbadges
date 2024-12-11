@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={`${inter.className} antialiased`}>
           <div style={{ 
             display: 'flex',
             flexDirection: 'column',
@@ -30,8 +30,12 @@ export default function RootLayout({
             <MenuBar />
             <main style={{ 
               flex: '1 0 auto',
-              paddingTop: '5rem',
-              paddingBottom: '2rem'
+              paddingTop: 'calc(4rem + 2vw)',
+              paddingBottom: 'calc(1rem + 2vw)',
+              width: '100%',
+              maxWidth: '1200px',
+              margin: '0 auto',
+              padding: '0 clamp(1rem, 5vw, 2rem)'
             }}>
               {children}
             </main>

@@ -12,29 +12,29 @@ const Footer = () => {
       <Container>
         <Grid divided inverted stackable>
           <Grid.Row>
-            <Grid.Column width={7}>
+            <Grid.Column width={7} mobile={16} tablet={8} computer={7}>
               <Header as='h4' inverted>
                 Badge Management System
               </Header>
-              <p>
+              <p className="text-sm md:text-base">
                 Efficiently manage temporary badges and track their status.
               </p>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={3} mobile={16} tablet={8} computer={3}>
               <Header inverted as='h4'>
                 Links
               </Header>
-              <List link inverted>
+              <List link inverted className="text-sm md:text-base">
                 <List.Item as='a' href='/'>Home</List.Item>
                 <List.Item as='a' href='/badges'>Badges</List.Item>
                 <List.Item as='a' href='/about'>About</List.Item>
               </List>
             </Grid.Column>
-            <Grid.Column width={6}>
+            <Grid.Column width={6} mobile={16} computer={6}>
               <Header as='h4' inverted>
                 Contact
               </Header>
-              <p>
+              <p className="text-sm md:text-base">
                 For support, please contact the IT department.
               </p>
             </Grid.Column>

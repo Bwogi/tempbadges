@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --max-width: 1100px;
+  --max-width: 1200px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
@@ -40,50 +40,81 @@ a {
   text-decoration: none;
 }
 
-/* Add padding to main content area to account for fixed header */
-main {
+/* Responsive container */
+.container {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 clamp(1rem, 5vw, 2rem);
 }
 
-.mobile-menu,
-.mobile-view {
-  display: none;
+/* Responsive text utilities */
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1em;
-  padding: 0.5em;
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
-.auth-buttons {
-  position: fixed;
-  top: 1em;
-  right: 1em;
+@media (min-width: 768px) {
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
+/* Mobile menu styles */
+@media (max-width: 767px) {
+  .desktop-menu {
+    display: none !important;
+  }
+  
+  .mobile-menu {
+    display: block !important;
+  }
+
+  /* Adjust table display for mobile */
+  .ui.table {
+    font-size: 0.85rem;
+  }
+
+  .ui.table thead th {
+    padding: 0.5em !important;
+  }
+
+  .ui.table td {
+    padding: 0.5em !important;
+  }
+
+  /* Stack form fields on mobile */
+  .ui.form .fields {
+    flex-direction: column;
+    margin: 0 !important;
+  }
+
+  .ui.form .fields .field {
+    margin: 0 0 1rem 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-menu {
+    display: none !important;
+  }
+  
+  .desktop-menu {
+    display: block !important;
+  }
+}
+
+/* Sidebar overlay */
+.ui.overlay.sidebar {
   z-index: 1000;
-  display: flex;
-  gap: 0.5em;
-  align-items: center;
-}
-
-/* Clerk Modal Customization */
-.cl-modalContent {
-  max-width: 100% !important;
-  margin: 1rem !important;
-  border-radius: 1rem !important;
-}
-
-.cl-formButtonPrimary {
-  width: 100% !important;
-}
-
-.cl-phoneInputBox {
-  width: 100% !important;
 }
 
 /* Date Picker Styles */
@@ -127,53 +158,21 @@ main {
   background-color: #1678c2;
 }
 
+/* Responsive form controls */
 @media (max-width: 767px) {
-  .desktop-menu,
-  .desktop-view {
-    display: none !important;
+  .ui.form input,
+  .ui.form select,
+  .ui.form textarea,
+  .ui.button {
+    font-size: 16px !important; /* Prevents zoom on mobile */
   }
   
-  .mobile-menu,
-  .mobile-view {
-    display: block !important;
+  .ui.grid {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
-
-  .ui.table {
-    font-size: 0.8em;
-  }
-
-  .ui.button {
-    padding: 0.5em 1em;
-    font-size: 0.8em;
-  }
-
-  .header-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1em;
-    margin-top: 3em; /* Add space for fixed auth buttons */
-  }
-
-  .header-container h2 {
-    margin-right: 3em; /* Make room for the auth buttons */
-  }
-
-  /* Clerk Mobile Customization */
-  .cl-card {
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-  }
-
-  .cl-modalContent {
-    margin: 0 !important;
-    border-radius: 0 !important;
-    min-height: 100vh !important;
-  }
-
-  .cl-phoneInputBox,
-  .cl-formButtonPrimary {
-    height: 48px !important; /* Larger touch targets */
+  
+  .ui.grid > .row > .column {
+    padding: 1rem 0 !important;
   }
 }
