@@ -66,6 +66,54 @@ a {
   }
 }
 
+/* Menu Styles */
+.ui.menu.fixed {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+}
+
+.ui.menu .item {
+  display: flex;
+  align-items: center;
+}
+
+.ui.menu .item i.icon {
+  margin-right: 0.5rem;
+}
+
+/* Desktop Menu Specific */
+.desktop-menu {
+  background-color: #1b1c1d !important;
+  border: none !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.desktop-menu .item {
+  color: rgba(255,255,255,0.9) !important;
+  font-weight: 500 !important;
+}
+
+.desktop-menu .item:hover {
+  background-color: rgba(255,255,255,0.1) !important;
+}
+
+.desktop-menu .item.active {
+  background-color: rgba(255,255,255,0.15) !important;
+  font-weight: 600 !important;
+}
+
+/* Mobile Menu Specific */
+.mobile-menu {
+  background-color: #1b1c1d !important;
+  border: none !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.ui.sidebar {
+  background-color: #1b1c1d !important;
+}
+
 /* Mobile menu styles */
 @media (max-width: 767px) {
   .desktop-menu {

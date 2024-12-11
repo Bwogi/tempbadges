@@ -16,14 +16,15 @@ const MenuBar = () => {
     signOut();
   };
 
-  const menuItems = (
+  const menuItems = (isMobile: boolean) => (
     <>
       <Menu.Item
         as={Link}
         href="/"
         active={pathname === '/'}
-        onClick={() => setSidebarVisible(false)}
+        onClick={() => isMobile && setSidebarVisible(false)}
       >
+        <Icon name='home' className='hidden md:inline' />
         Home
       </Menu.Item>
       {isSignedIn && (
@@ -31,19 +32,21 @@ const MenuBar = () => {
           as={Link}
           href="/badges"
           active={pathname === '/badges'}
-          onClick={() => setSidebarVisible(false)}
+          onClick={() => isMobile && setSidebarVisible(false)}
         >
+          <Icon name='id card' className='hidden md:inline' />
           Badge Management
         </Menu.Item>
       )}
     </>
   );
 
-  const authItems = (
+  const authItems = (isMobile: boolean) => (
     <>
       {isSignedIn ? (
         <>
           <Menu.Item>
+            <Icon name='user' className='hidden md:inline' />
             <span>Welcome, {user?.firstName || 'User'}</span>
           </Menu.Item>
           <Menu.Item>
@@ -51,7 +54,10 @@ const MenuBar = () => {
               negative 
               onClick={handleSignOut}
               size='small'
+              icon
+              labelPosition='left'
             >
+              <Icon name='sign-out' />
               Logout
             </Button>
           </Menu.Item>
@@ -60,8 +66,9 @@ const MenuBar = () => {
         <Menu.Item
           as={Link}
           href="/sign-in"
-          onClick={() => setSidebarVisible(false)}
+          onClick={() => isMobile && setSidebarVisible(false)}
         >
+          <Icon name='sign in' className='hidden md:inline' />
           Sign In
         </Menu.Item>
       )}
@@ -71,15 +78,15 @@ const MenuBar = () => {
   return (
     <>
       {/* Desktop Menu */}
-      <Menu fixed="top" inverted className="desktop-menu" style={{ marginBottom: '2rem' }}>
-        {menuItems}
+      <Menu fixed="top" inverted className="desktop-menu">
+        {menuItems(false)}
         <Menu.Menu position="right">
-          {authItems}
+          {authItems(false)}
         </Menu.Menu>
       </Menu>
 
       {/* Mobile Menu */}
-      <Menu fixed="top" inverted className="mobile-menu" style={{ marginBottom: '2rem' }}>
+      <Menu fixed="top" inverted className="mobile-menu">
         <Menu.Item onClick={() => setSidebarVisible(true)}>
           <Icon name="bars" />
         </Menu.Item>
@@ -96,8 +103,8 @@ const MenuBar = () => {
         onHide={() => setSidebarVisible(false)}
         style={{ paddingTop: '4rem' }}
       >
-        {menuItems}
-        {authItems}
+        {menuItems(true)}
+        {authItems(true)}
       </Sidebar>
     </>
   );
