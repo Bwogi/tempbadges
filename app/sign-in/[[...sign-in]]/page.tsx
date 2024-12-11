@@ -13,9 +13,6 @@ export default function Page() {
         path="/sign-in"
         routing="path"
         signUpUrl="/sign-up"
-        initialValues={{
-          strategy: "phone_code"
-        }}
       />
     </div>
   );
