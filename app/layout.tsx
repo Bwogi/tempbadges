@@ -20,24 +20,14 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={`${inter.className} antialiased`}>
-          <div style={{ 
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '100vh'
-          }}>
+      <html lang="en" className="h-full bg-gray-50">
+        <body className={`${inter.className} h-full`}>
+          <div className="min-h-full">
             <MenuBar />
-            <main style={{ 
-              flex: '1 0 auto',
-              paddingTop: 'calc(4rem + 2vw)',
-              paddingBottom: 'calc(1rem + 2vw)',
-              width: '100%',
-              maxWidth: '1200px',
-              margin: '0 auto',
-              padding: '0 clamp(1rem, 5vw, 2rem)'
-            }}>
-              {children}
+            <main className="py-10">
+              <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                {children}
+              </div>
             </main>
             <Footer />
           </div>
