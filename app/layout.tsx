@@ -22,15 +22,21 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <MenuBar />
           <div style={{ 
-            paddingTop: '6rem', 
-            paddingBottom: '8rem',
+            display: 'flex',
+            flexDirection: 'column',
             minHeight: '100vh'
           }}>
-            {children}
+            <MenuBar />
+            <main style={{ 
+              flex: '1 0 auto',
+              paddingTop: '5rem',
+              paddingBottom: '2rem'
+            }}>
+              {children}
+            </main>
+            <Footer />
           </div>
-          <Footer />
         </body>
       </html>
     </ClerkProvider>

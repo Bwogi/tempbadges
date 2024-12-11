@@ -6,9 +6,7 @@ const Footer = () => {
   return (
     <Segment inverted vertical style={{ 
       padding: '2em 0em',
-      marginTop: '3rem',
-      position: 'fixed',
-      bottom: 0,
+      marginTop: 'auto',
       width: '100%'
     }}>
       <Container>
