@@ -99,10 +99,10 @@ export default function EmployeeList({
     setSearchQuery(query);
     const filtered = employees.filter((employee) => {
       return (
-        employee.name.toLowerCase().includes(query) ||
-        employee.id.includes(query) ||
-        employee.building.toLowerCase().includes(query) ||
-        employee.provider.toLowerCase().includes(query)
+        (employee.name ? employee.name.toLowerCase().includes(query) : false) ||
+        (employee.id ? employee.id.includes(query) : false) ||
+        (employee.building ? employee.building.toLowerCase().includes(query) : false) ||
+        (employee.provider ? employee.provider.toLowerCase().includes(query) : false)
       );
     });
     setFilteredEmployees(filtered);
